@@ -1,4 +1,6 @@
-## RAG Q&A Conversation With PDF Including Chat History
+
+__import__("pysqlite3")
+sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
 import streamlit as st
 from langchain.chains import create_history_aware_retriever, create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
@@ -124,6 +126,7 @@ if api_key:
             st.write("Chat History:", session_history.messages)
 else:
     st.warning("Please enter the GROQ API Key")
+
 
 
 
