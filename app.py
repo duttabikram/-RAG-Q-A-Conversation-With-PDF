@@ -121,6 +121,7 @@ if api_key:
                     "configurable": {"session_id":session_id}
                 },  # constructs a key "abc123" in `store`.
             )
+            st.write(response)
             st.write(st.session_state.store)
             st.write("Assistant:", response['answer'])
             st.write("Chat History:", session_history.messages)
