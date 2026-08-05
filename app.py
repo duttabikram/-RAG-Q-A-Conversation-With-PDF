@@ -130,6 +130,7 @@ Do NOT answer from previous conversations.
             )
             st.write("Uploaded:", uploaded_file.name)
             st.write("Metadata:", docs[0].metadata)
+            st.write(docs[0].page_content[:300])
             st.write(response)
             st.write(st.session_state.store)
             st.write("Assistant:", response['answer'])
