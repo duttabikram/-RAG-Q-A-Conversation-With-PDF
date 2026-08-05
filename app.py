@@ -128,6 +128,8 @@ Do NOT answer from previous conversations.
                     "configurable": {"session_id":session_id}
                 },  # constructs a key "abc123" in `store`.
             )
+            st.write("Uploaded:", uploaded_file.name)
+            st.write("Metadata:", docs[0].metadata)
             st.write(response)
             st.write(st.session_state.store)
             st.write("Assistant:", response['answer'])
