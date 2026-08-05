@@ -80,22 +80,15 @@ if api_key:
         history_aware_retriever=create_history_aware_retriever(llm,retriever,contextualize_q_prompt)
 
         # Answer question
-        system_prompt = """
-You are a PDF Question Answering Assistant.
-
-Answer ONLY from the retrieved context.
-
-If the answer is not explicitly present in the retrieved context,
-reply exactly:
-
-"I couldn't find this information in the uploaded PDF."
-
-Do NOT use your own knowledge.
-Do NOT guess.
-Do NOT answer from previous conversations.
-
-{context}
-"""
+        system_prompt = (
+                "You are an assistant for question-answering tasks. "
+                "Use the following pieces of retrieved context to answer "
+                "the question. If you don't know the answer, say that you "
+                "don't know. Use three sentences maximum and keep the "
+                "answer concise."
+                "\n\n"
+                "{context}"
+            )
         qa_prompt = ChatPromptTemplate.from_messages(
                 [
                     ("system", system_prompt),
@@ -128,10 +121,6 @@ Do NOT answer from previous conversations.
                     "configurable": {"session_id":session_id}
                 },  # constructs a key "abc123" in `store`.
             )
-            st.write("Uploaded:", uploaded_file.name)
-            st.write("Metadata:", docs[0].metadata)
-            st.write(docs[0].page_content[:300])
-            st.write(response)
             st.write(st.session_state.store)
             st.write("Assistant:", response['answer'])
             st.write("Chat History:", session_history.messages)
